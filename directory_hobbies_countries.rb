@@ -39,7 +39,7 @@ end
 def print(students)
     line_length = 90 
     students.each_with_index do |student, index|
-      puts ("#{index + 1}. #{student[:name]}, #{student[:nationality]}).ljust(line_length/3) (#{student[:cohort]} cohort).l_just(line_length/3) (hobbies: #{student[:hobbies]}).r_just(line_length/3"
+      puts ("#{index + 1}. #{student[:name]}, #{student[:nationality]}").ljust(line_length/3) + ("(#{student[:cohort]} cohort)").ljust(line_length/3) + ("(hobbies: #{student[:hobbies]})").rjust(line_length/3)
     end
 end
 
