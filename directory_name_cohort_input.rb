@@ -1,7 +1,6 @@
 def input_students
     puts "Please enter the names of the students and their respective cohorts"
     puts "To finish, just hit return twice"
-    
     students = []
     
     puts 'student name:'
@@ -20,7 +19,11 @@ def input_students
         students << {name: ("student #{student.count}").to_sym, cohort: cohort.to_sym}
         end 
         
+        if students.count == 1
+        puts "The new student you have entered is #{name.to_s} and they belong to cohort #{cohort.to_s}. Now we have 1 student. Do you want to make any changes to the name or the cohort? Please type '\yes'\ for any changes and any other key if you don\'t want to make any changes."
+        else 
         puts "The new student you have entered is #{name.to_s} and they belong to cohort #{cohort.to_s}. Now we have #{students.count} students. Do you want to make any changes to the name or the cohort? Please type '\yes'\ for any changes and any other key if you don\'t want to make any changes."
+        end
         
         response = gets.chomp.downcase 
         
@@ -62,16 +65,29 @@ def print_header
 end 
 
 def print(students)
-    students.each_with_index do |student, index|
-      puts "#{index + 1}. #{(student[:name]).to_s} (#{(student[:cohort]).to_s} cohort)"
+    puts 'Which cohort of students would you like to show?'
+    cohort_to_show = gets.chomp 
+    num = 0
+    
+    student_in_cohort = []
+
+    students.map do |student|
+      if (student[:cohort]).to_s == cohort_to_show
+      num += 1 
+      puts "#{num}. #{(student[:name]).to_s} (#{(student[:cohort]).to_s} cohort)"
+      student_in_cohort << student 
+      end
     end
+    
+    return student_in_cohort 
 end
 
 def print_footer(names)
-   puts "Overall, we have #{names.count} great students"
+   puts "Overall, we have #{names.count} great students. "
 end 
 
 students = input_students
 print_header
 print(students)
+puts
 print_footer(students)
